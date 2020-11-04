@@ -50,5 +50,6 @@ async def changeprefix(ctx, prefix):
     with open('prefixes.json','w') as f:
         json.dump(prefixes,f,indent=4)
 
+    print(f'[PREFIX CHANGED TO {prefix}]')
 
 client.run('NzczNDc2NTA5Njk1NDc1NzIz.X6JyIg.8pZfUSSS04XlU3DKF5GMTaiun7E')
