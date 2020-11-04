@@ -22,7 +22,20 @@ class Manager(commands.Cog):
     async def ban(ctx, member:discord.Member, * ,reason = None):
         await member.ban(reason = reason)
         print('[MEMBER BANNED]')
-        
+    
+    #Command for unban users
+    @commands.command()
+    async def unban(ctx, *,member):
+        banned_users = await ctx.guild.bans()
+        member_name , member_discriminator = member.split('#')
+        for ban_entry in banned_users:
+            user = ban_entry.user
+            if(user.name,user.discriminator) == (member_name,member_discriminator):
+                await ctx.guild.unban(user)
+                await ctx.send(f'Unbanned {user.mention}')
+                print(f'[USER {user.mention} UNBANNED]')
+                return
+
 def setup(client):
     client.add_cog(Manager(client))
 
