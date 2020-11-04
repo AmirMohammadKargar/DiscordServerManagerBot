@@ -16,6 +16,12 @@ class Manager(commands.Cog):
     async def kick(ctx, member:discord.Member, * ,reason = None):
         await member.kick(reason = reason)
         print('[MEMBER KICKED]')
+    
+    #Command for ban members from server
+    @commands.command()
+    async def ban(ctx, member:discord.Member, * ,reason = None):
+        await member.ban(reason = reason)
+        print('[MEMBER BANNED]')
         
 def setup(client):
     client.add_cog(Manager(client))
