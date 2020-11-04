@@ -25,6 +25,7 @@ async def on_guild_join(guild):
 
     with open('prefixes.json','w') as f:
         json.dump(prefixes,f,indent=4)
+    print(f'[ADD DEFAULT PREFIX]')
 
 #Event that remove prefix from json file when bot remove from server
 @client.event
