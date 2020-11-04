@@ -1,5 +1,6 @@
 import discord
 import json
+import os
 from discord.ext import commands
 
 #Read prefixes from prefixes json file
@@ -61,5 +62,10 @@ async def load(ctx, extension):
 @client.command()
 async def unload(ctx, extension):
     client.unload_extension(f'cogs.{extension}')
+
+#Read all cogs
+for filename in os.listdir('./cogs'):
+    if filename.endwith('.py'):
+        client.load_extension(f'cogs.{filename[:-3]}')
 
 client.run('NzczNDc2NTA5Njk1NDc1NzIz.X6JyIg.8pZfUSSS04XlU3DKF5GMTaiun7E')
