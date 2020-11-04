@@ -52,4 +52,8 @@ async def changeprefix(ctx, prefix):
 
     print(f'[PREFIX CHANGED TO {prefix}]')
 
+@client.command()
+async def load(ctx, extension):
+    client.load_extension(f'cogs.{extension}')
+
 client.run('NzczNDc2NTA5Njk1NDc1NzIz.X6JyIg.8pZfUSSS04XlU3DKF5GMTaiun7E')
