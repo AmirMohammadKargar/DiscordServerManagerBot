@@ -12,7 +12,7 @@ def get_prefix(client,message):
 #Create bot
 client = commands.Bot(command_prefix = get_prefix)
 
-#Event that show bot is start
+#Event that show bot is starting
 @client.event
 async def on_ready():
     print('[BOT IS RUNNING]')
@@ -65,7 +65,7 @@ async def unload(ctx, extension):
 
 #Read all cogs
 for filename in os.listdir('./cogs'):
-    if filename.endwith('.py'):
+    if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-client.run('NzczNDc2NTA5Njk1NDc1NzIz.X6JyIg.8pZfUSSS04XlU3DKF5GMTaiun7E')
+client.run('NzczNDc2NTA5Njk1NDc1NzIz.X6JyIg.7n8x-ch6VYAW7ZNMVSGmAuHKlW8')
