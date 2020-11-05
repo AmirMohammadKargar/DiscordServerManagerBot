@@ -22,6 +22,11 @@ async def on_ready():
 async def on_member_join(member):
     print(f'[[member] HAS JOINED SERVER]')
 
+#Event for log remove user
+@client.event
+async def on_member_remove(member):
+    print(f'[[member] HAS LEFTED SERVER]')
+
 #Event that create defualt value for prefix when bot join server
 @client.event
 async def on_guild_join(guild):
