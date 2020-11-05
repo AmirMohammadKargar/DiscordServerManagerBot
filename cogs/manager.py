@@ -35,6 +35,7 @@ class Manager(commands.Cog):
                 await ctx.send(f'Unbanned {user.mention}')
                 print(f'[USER {user.mention} UNBANNED]')
                 return
+   
 
 def setup(client):
     client.add_cog(Manager(client))

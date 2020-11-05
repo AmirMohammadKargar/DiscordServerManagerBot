@@ -17,6 +17,11 @@ client = commands.Bot(command_prefix = get_prefix)
 async def on_ready():
     print('[BOT IS RUNNING]')
 
+#Event for log new user
+@client.event
+async def on_member_join(member):
+    print(f'[[member] HAS JOINED SERVER]')
+
 #Event that create defualt value for prefix when bot join server
 @client.event
 async def on_guild_join(guild):
@@ -68,4 +73,4 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-client.run('')
+client.run('NzczNDc2NTA5Njk1NDc1NzIz.X6JyIg.mn7d6bYnXGYoyG6usT5DCc9m34M')
