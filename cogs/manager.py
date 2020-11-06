@@ -59,6 +59,11 @@ class Manager(commands.Cog):
         embed.add_field(name='Members',value=member_count,inline=True)
         await ctx.send(embed=embed)
 
+    #Command for delete message
+    @commands.command()
+    async def clear(self,ctx,amount = 5):
+        await ctx.channel.purge(limit = amount)
+
 def setup(client):
     client.add_cog(Manager(client))
 
