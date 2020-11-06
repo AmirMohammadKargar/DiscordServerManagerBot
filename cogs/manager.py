@@ -1,28 +1,41 @@
 import discord
 import os.path
+import datetime
 from discord.ext import commands
 
 class Manager(commands.Cog):
     
     def __init__(self,client):
         self.client = client
-    
+
+    #Command for showing ping
     @commands.command()
     async def ping(self, ctx):
         await ctx.send(f'{round(self.client.latency*1000)}ms')
         print('[PING COMMAND]')
+        now = datetime.datetime.now()
+        with open(os.path.dirname(__file__)+'/../logs.txt','a+') as f:
+            f.write(f'\n[%s]->[PING COMMAND]\n'%(now))
     
     #Command for kick members from server
     @commands.command()
     async def kick(self,ctx, member:discord.Member, * ,reason = None):
         await member.kick(reason = reason)
         print('[MEMBER KICKED]')
+
+        now = datetime.datetime.now()
+        with open(os.path.dirname(__file__)+'/../logs.txt','a+') as f:
+            f.write(f'\n[%s]->[%s MEMBER KICKED]\n'%(now,member.mention))
     
     #Command for ban members from server
     @commands.command()
     async def ban(self,ctx, member:discord.Member, * ,reason = None):
         await member.ban(reason = reason)
         print('[MEMBER BANNED]')
+        
+        now = datetime.datetime.now()
+        with open(os.path.dirname(__file__)+'/../logs.txt','a+') as f:
+            f.write(f'\n[%s]->[%s MEMBER BANNED]\n'%(now,member.mention))
     
     #Command for unban users
     @commands.command()
@@ -35,6 +48,9 @@ class Manager(commands.Cog):
                 await ctx.guild.unban(user)
                 await ctx.send(f'Unbanned {user.mention}')
                 print(f'[USER {user.mention} UNBANNED]')
+                now = datetime.datetime.now()
+                with open(os.path.dirname(__file__)+'/../logs.txt','a+') as f:
+                    f.write(f'\n[%s]->[%S MEMBER UNBANNED]\n'%(now,user.mention))
                 return
 
     #Command for show server information 
