@@ -1,4 +1,5 @@
 import discord
+import os.path
 from discord.ext import commands
 
 class Manager(commands.Cog):
@@ -35,6 +36,7 @@ class Manager(commands.Cog):
                 await ctx.send(f'Unbanned {user.mention}')
                 print(f'[USER {user.mention} UNBANNED]')
                 return
+
     #Command for show server information 
     @commands.command()
     async def info(self,ctx):
@@ -63,6 +65,13 @@ class Manager(commands.Cog):
     @commands.command()
     async def clear(self,ctx,amount = 5):
         await ctx.channel.purge(limit = amount)
+    
+    #Command for showing log from log file
+    @commands.command()
+    async def log(self,ctx):
+        with open(os.path.dirname(__file__)+'/../logs.txt','r') as f:
+            data = f.read()
+            await ctx.send(data)
 
 def setup(client):
     client.add_cog(Manager(client))
