@@ -98,7 +98,18 @@ class Manager(commands.Cog):
         print(f'[ADD ROLE {role} TO {user}]')
         now = datetime.datetime.now()
         with open(os.path.dirname(__file__)+'/../logs.txt','a+') as f:
-            f.write(f'\n[%s]->[ADD ROLE {role} TO {user}]'%(now))
+            f.write(f'\n[%s]->[ADD ROLE {role} TO {user}\n]'%(now))
+
+    #Command for remove role from users
+    @commands.command()
+    async def remove_role(self,ctx,role:discord.Role,user:discord.Member):
+        await user.remove_roles(role)
+        await ctx.send(f'Successfully remove {role.mention} from {user.mention}.')
+
+        print(f'[REMOVE ROLE {role} FROM {user}]')
+        now = datetime.datetime.now()
+        with open(os.path.dirname(__file__)+'/../logs.txt','a+') as f:
+            f.write(f'\n[%s]->[REMOVE ROLE {role} FROM {user}]\n'%(now))
 
 def setup(client):
     client.add_cog(Manager(client))
