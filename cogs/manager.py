@@ -111,6 +111,15 @@ class Manager(commands.Cog):
         with open(os.path.dirname(__file__)+'/../logs.txt','a+') as f:
             f.write(f'\n[%s]->[REMOVE ROLE {role} FROM {user}]\n'%(now))
 
+    #Command for change status of bot
+    @commands.command()
+    async def status(self,ctx,arg):
+        if arg == 'None':
+            await self.client.change_presence(status=None)
+        else:
+            await self.client.change_presence(activity=discord.Game(name=arg))
+            
+
 def setup(client):
     client.add_cog(Manager(client))
 
