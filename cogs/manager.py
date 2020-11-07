@@ -25,7 +25,7 @@ class Manager(commands.Cog):
 
         now = datetime.datetime.now()
         with open(os.path.dirname(__file__)+'/../logs.txt','a+') as f:
-            f.write(f'\n[%s]->[%s MEMBER KICKED]\n'%(now,member.mention))
+            f.write(f'\n[%s]->[{member} MEMBER KICKED]\n'%(now))
     
     #Command for ban members from server
     @commands.command()
@@ -35,7 +35,7 @@ class Manager(commands.Cog):
         
         now = datetime.datetime.now()
         with open(os.path.dirname(__file__)+'/../logs.txt','a+') as f:
-            f.write(f'\n[%s]->[%s MEMBER BANNED]\n'%(now,member.mention))
+            f.write(f'\n[%s]->[{member} MEMBER BANNED]\n'%(now))
     
     #Command for unban users
     @commands.command()
@@ -47,10 +47,10 @@ class Manager(commands.Cog):
             if(user.name,user.discriminator) == (member_name,member_discriminator):
                 await ctx.guild.unban(user)
                 await ctx.send(f'Unbanned {user.mention}')
-                print(f'[USER {user.mention} UNBANNED]')
+                print(f'[USER {member} UNBANNED]')
                 now = datetime.datetime.now()
                 with open(os.path.dirname(__file__)+'/../logs.txt','a+') as f:
-                    f.write(f'\n[%s]->[%S MEMBER UNBANNED]\n'%(now,user.mention))
+                    f.write(f'\n[%s]->[{user} MEMBER UNBANNED]\n'%(now))
                 return
 
     #Command for show server information 
@@ -88,6 +88,17 @@ class Manager(commands.Cog):
         with open(os.path.dirname(__file__)+'/../logs.txt','r') as f:
             data = f.read()
             await ctx.send(data)
+    
+    #Command for add give role to users
+    @commands.command()
+    async def add_role(self,ctx,role:discord.Role,user:discord.Member):
+        await user.add_roles(role)
+        await ctx.send(f'Successfully given {role.mention} to {user.mention}.')
+
+        print(f'[ADD ROLE {role} TO {user}]')
+        now = datetime.datetime.now()
+        with open(os.path.dirname(__file__)+'/../logs.txt','a+') as f:
+            f.write(f'\n[%s]->[ADD ROLE {role} TO {user}]'%(now))
 
 def setup(client):
     client.add_cog(Manager(client))
